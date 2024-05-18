@@ -1,0 +1,30 @@
+ 
+ .header
+ {
+    font-size: 30px;
+ } 
+
+.head-menu
+{
+     
+    position: absolute;
+    right: 20px;
+    
+}
+
+
+.menu{
+    padding: 10px;
+}
+
+.menu :hover
+{
+    cursor: pointer;
+    color: #3b36e0;
+} 
+
+.menu a
+{
+    text-decoration: none;
+    color: white;
+}

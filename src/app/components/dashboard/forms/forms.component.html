@@ -1,0 +1,74 @@
+<form [formGroup]="Reactiveform" (ngSubmit)="submit()">
+
+
+    <div class="container">
+        <mat-card class="task-card" color="accent">
+            <mat-card-title>Create Tasks</mat-card-title>
+
+            <mat-form-field class="fullwidth">
+                <mat-label>Task Number</mat-label>
+                <input matInput [formControlName]="'tasknumber'" [errorStateMatcher]="matcher" />
+
+                <mat-error *ngIf="Reactiveform.get('tasknumber')?.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="space-between">
+                <mat-form-field>
+                    <mat-label>Assigned To</mat-label>
+                    <input matInput [formControlName]="'assignedTo'" />
+
+                    <mat-error *ngIf="Reactiveform.get('assignedTo')?.hasError('required')">
+                        Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <span></span>
+
+
+
+                <mat-form-field>
+                    <mat-label>Assigned By</mat-label>
+                    <input matInput [formControlName]="'assignedBy'" />
+                    <mat-error *ngIf="Reactiveform.get('assignedTo')?.hasError('required')">
+                        Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+
+
+
+            <div class="space-between">
+                <mat-form-field>
+                    <mat-label>Assigned On</mat-label>
+                    <input matInput type="date" [formControlName]="'assignedOn'" />
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Priority level</mat-label>
+                    <mat-select [formControlName]="'priority'">
+                        <mat-option *ngFor="let item of priorityList" [value]="item.priority">
+                            {{item.priority}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field class="fullwidth text-area">
+                <mat-label>Task Description</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" [formControlName]="'taskDescription'"></textarea>
+                <mat-error *ngIf="Reactiveform.get('taskDescription')?.hasError('required')">
+                    Task Description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+
+            <button class="submit-button" mat-stroked-button [disabled]="!this.Reactiveform.valid" color="accent">Submit</button>
+        </mat-card>
+    </div>
+
+</form>

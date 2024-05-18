@@ -1,0 +1,59 @@
+
+.container
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.mat-toolbar {
+    display: flex;
+    justify-content: center;
+}
+
+.task-card{
+    width: 400px;
+    height: 390px;
+    border: .3px solid pink;
+    box-shadow: 10px 10px 5px lightblue;
+    padding: 20px;
+
+}
+
+ 
+.mat-card-title{
+    text-align: center;
+    padding-left: 20px;
+     
+}
+
+.fullwidth
+{
+    display: block;
+    width: 100%;
+}
+ 
+.space-between{
+display: flex;
+justify-content: space-between;
+}
+
+.text-area{
+     
+    height: 15%;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    padding-bottom: 0px;
+}
+
+.submit-button{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.error-text{
+    font-size: 12px ;
+    color: red;
+}
+ 
+

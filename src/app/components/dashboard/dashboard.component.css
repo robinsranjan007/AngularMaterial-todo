@@ -1,0 +1,69 @@
+.mat-toolbar {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgb(233, 225, 225);
+}
+
+.cards-container{
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+/* border: 1px solid black; */
+width: 100%;
+ 
+}
+
+.mat-card{
+    /* border: 2px solid black; */
+
+    display: inline-block;
+    width: 380px;
+    height: 250px;
+    margin: 20px;
+    box-shadow: 8px 7px rgb(247, 199, 207);
+}
+
+.buttons-container{
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    justify-content: space-evenly;
+ 
+    width: 90%;
+}
+
+.text-format{
+    padding: 10px;
+    display: inline-block;
+    width: 40%;
+     
+}
+
+ 
+
+.action-buttons{
+    margin: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 15px;
+    width: 80%;
+}
+
+.mat-card-button{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* border: 1px dotted black; */
+}
+
+.add-button
+{
+    font-size: 60px;
+    font-weight: 100;
+    display: flex;
+    border: none;
+}
+
+
+/*  */
+
