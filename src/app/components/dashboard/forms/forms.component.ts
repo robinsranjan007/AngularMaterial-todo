@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  Inject, OnInit, } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators ,NgForm,FormGroupDirective} from '@angular/forms';
 import { formData, priorityList } from 'src/app/modal';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -11,18 +12,19 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css'],
 })
 export class FormsComponent implements OnInit {
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<FormsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: formData
+  ) {}
 
-  formData: formData[] = []; //this is to store the data from the task form
-  showform: boolean = false; //this is to toggle the task form
   matcher = new MyErrorStateMatcher(); //error message using angular material
+
 
   ngOnInit(): void {
     this.getform();
@@ -56,13 +58,12 @@ export class FormsComponent implements OnInit {
     });
   }
 
-  submit() {
-    this.formData.push(this.Reactiveform.value as formData) 
-    console.log(this.Reactiveform);
-    
+  submit() {   
+    this.dialogRef.close({ ...this.Reactiveform.value as formData});
   }
 
-  openAncCloseTaskForm() {
-    this.showform = !this.showform;
+  closeForm()
+  {
+    this.dialogRef.close(null)
   }
 }

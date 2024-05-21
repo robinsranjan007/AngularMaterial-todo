@@ -20,7 +20,18 @@ width: 100%;
     width: 380px;
     height: 250px;
     margin: 20px;
-    box-shadow: 8px 7px rgb(247, 199, 207);
+    
+}
+
+.high{
+    box-shadow: 8px 7px rgb(215, 40, 69);
+}
+
+.medium{
+    box-shadow: 8px 7px rgb(252, 255, 102);
+}
+.low{
+    box-shadow: 8px 7px rgb(95, 240, 79) ;
 }
 
 .buttons-container{

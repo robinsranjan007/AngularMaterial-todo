@@ -2,22 +2,18 @@
   <span>Pending Tasks</span>
 </mat-toolbar>
 
- 
-        
-    
 
 <div class="cards-container">
 
- 
-    <mat-card>
-        <mat-card-subtitle><strong>Ticket Number:</strong></mat-card-subtitle>
+    <mat-card  *ngFor="let item of formData" [ngClass]="{'high':item.priority==='High','medium':item.priority==='Medium','low':item.priority==='Low'}">
+        <mat-card-subtitle><strong>Ticket Number: </strong> {{item.tasknumber}}</mat-card-subtitle>
         <div>
-            <span class="text-format"><strong>Assigned To:</strong> Robins</span>
-            <span class="text-format"><strong>Assigned By:</strong> Ranjan</span>
+            <span class="text-format"><strong>Assigned To:</strong> {{item.assignedTo}}</span>
+            <span class="text-format"><strong>Assigned By: </strong> {{item.assignedBy}}</span>
         </div>
         <div>
-            <span class="text-format"><strong>Priority:</strong> High</span>
-            <span class="text-format"><strong>Assigned On:</strong> 23/24/11</span>
+            <span class="text-format"><strong>Priority:</strong>  {{item.priority}}</span>
+            <span class="text-format"><strong>Assigned On: </strong> {{item.assignedOn}}</span>
         </div>
     
         <div class="description-box">
@@ -34,63 +30,9 @@
     
     
     </mat-card>
-    <mat-card>
-        <mat-card-subtitle><strong>Ticket Number:</strong></mat-card-subtitle>
-        <div>
-            <span class="text-format"><strong>Assigned To:</strong> Robins</span>
-            <span class="text-format"><strong>Assigned By:</strong> Ranjan</span>
-        </div>
-        <div>
-            <span class="text-format"><strong>Priority:</strong> High</span>
-            <span class="text-format"><strong>Assigned On:</strong> 23/24/11</span>
-        </div>
-    
-        <div class="description-box">
-            <p> <strong>description:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim impedit culpa
-                aperiam similique labore sapiente ullam temporibus nobis ipsa quae.
-            </p>
-        </div>
-    
-        <div class="buttons-container">
-            <button mat-stroked-button class="cards-buttons action-buttons" color="primary">details</button>
-            <button mat-stroked-button class="cards-buttons action-buttons" color="accent">update</button>
-            <button mat-stroked-button class="cards-buttons action-buttons" color="warn">delete</button>
-        </div>
-    
-    
-    </mat-card>
-    <mat-card>
-        <mat-card-subtitle><strong>Ticket Number:</strong></mat-card-subtitle>
-        <div>
-            <span class="text-format"><strong>Assigned To:</strong> Robins</span>
-            <span class="text-format"><strong>Assigned By:</strong> Ranjan</span>
-        </div>
-        <div>
-            <span class="text-format"><strong>Priority:</strong> High</span>
-            <span class="text-format"><strong>Assigned On:</strong> 23/24/11</span>
-        </div>
-    
-        <div class="description-box">
-            <p> <strong>description:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim impedit culpa
-                aperiam similique labore sapiente ullam temporibus nobis ipsa quae.
-            </p>
-        </div>
-    
-        <div class="buttons-container">
-            <button mat-stroked-button class="cards-buttons action-buttons" color="primary">details</button>
-            <button mat-stroked-button class="cards-buttons action-buttons" color="accent">update</button>
-            <button mat-stroked-button class="cards-buttons action-buttons" color="warn">delete</button>
-        </div>
-    
-    
-    </mat-card>
-
-
 
     <mat-card class="mat-card-button">
         <button mat-raised-button class="add-button" (click)="openDialog()" >+</button>
     </mat-card>
-
-
 
 </div>
