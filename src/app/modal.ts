@@ -1,4 +1,5 @@
 export interface formData{
+    id?:string
     tasknumber:number,
     assignedTo:string,
     assignedBy:string,
@@ -10,4 +11,8 @@ export interface formData{
 export interface priorityList {
     value:string
      priority:string
+  }
+
+  export interface firebaseresponse{
+    [key:string]:formData
   }

@@ -3,7 +3,9 @@ import {MatDialog} from '@angular/material/dialog';
 import { FormsComponent } from './forms/forms.component';
 import { formData } from 'src/app/modal';
 import { HttpServicesService } from 'src/app/services/http-services.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/services/error.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +14,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,private httpservice:HttpServicesService) {}
+  constructor(public dialog: MatDialog,private httpservice:HttpServicesService,public errorService:ErrorService,private _errorSnackBar:MatSnackBar) {}
 
   formData:formData[]=[];
+  httpErrorMessages:string='';
 
   ngOnInit(): void {
+    this.getFormData()
   }
+
 
 
   openDialog(): void {
@@ -35,21 +40,42 @@ export class DashboardComponent implements OnInit {
   }
 
 
+
   postFormData(val:formData)
   {
     this.httpservice.postData(val).subscribe(
       {
-        next:(val)=>{
-          console.log(val,'this is the val being posted');
-          
+        next:()=>{
+          this._errorSnackBar.open('Successfully created','close',{
+            duration:3000,
+            panelClass:['custom-snackbar'],
+          })
+          this.getFormData()
         },
-        error:(err:HttpErrorResponse)=>{
-          console.log(err);
-          // this is where we are writing businuess logic
-          
+        error:(err)=>{
+          this.httpErrorMessages=err;
+          this._errorSnackBar.open(this.httpErrorMessages,'Close',{
+            duration:3000,
+            panelClass:['custom-snackbar'],
+            
+          })
         }
       }
     )
   }
+
+getFormData( )
+{
+  this.httpservice.getData().subscribe({
+    
+    next:(data)=>{
+        console.log(data,'this is the data');
+        this.formData=data;
+    }
+  }
+   
+  )
+}
+
 
 }

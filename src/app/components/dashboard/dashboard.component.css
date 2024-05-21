@@ -75,6 +75,15 @@ width: 100%;
     border: none;
 }
 
+::ng-deep snack-bar-container.custom-snackbar{
+    color: white;
+    font-size: 25px;
+    position: absolute;
+    top: 40vh;
+    left: 40vw;
+    background-color: #151515;
+    color: #EEF7FF;
+}
 
 /*  */
-
+ 

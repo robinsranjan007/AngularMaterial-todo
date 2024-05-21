@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 const materials = [
@@ -20,7 +21,8 @@ const materials = [
   MatInputModule,
   TextFieldModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSnackBarModule
 ];
 
 
