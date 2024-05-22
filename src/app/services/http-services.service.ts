@@ -5,38 +5,57 @@ import { catchError, map } from 'rxjs';
 import { ErrorService } from './error.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpServicesService {
+  constructor(private http: HttpClient, private errorhandle: ErrorService) {}
 
-  constructor(private http:HttpClient,private errorhandle:ErrorService) { }
-
-  postData(data:formData)
-  {
-   return this.http.post<formData>('https://angular-material-1bedb-default-rtdb.firebaseio.com/task.json',data).pipe(
-    catchError(this.errorhandle.handleError)
-   )
+  postData(data: formData) {
+    return this.http
+      .post<formData>(
+        'https://angular-material-1bedb-default-rtdb.firebaseio.com/task.json',
+        data
+      )
+      .pipe(catchError(this.errorhandle.handleError));
   }
 
-  getData()
-  {
-    return this.http.get<firebaseresponse>('https://angular-material-1bedb-default-rtdb.firebaseio.com/task.json').pipe(
-    map((response:firebaseresponse)=>{
-    let arr=[];
-      for(let key in response)
-        {
-          if(response.hasOwnProperty(key)){
-            arr.push({...response[key],id:key})
+  getData() {
+    return this.http
+      .get<firebaseresponse>(
+        'https://angular-material-1bedb-default-rtdb.firebaseio.com/task.json'
+      )
+      .pipe(
+        map((response: firebaseresponse) => {
+          let arr = [];
+          for (let key in response) {
+            if (response.hasOwnProperty(key)) {
+              arr.push({ ...response[key], id: key });
+            }
           }
-        }
-        return arr;
-    }),
-    catchError(this.errorhandle.handleError)
-    )
+          return arr;
+        }),
+        catchError(this.errorhandle.handleError)
+      );
   }
 
+  getDetails(id: string | undefined) {
+    return this.http
+      .get<formData>(
+        `https://angular-material-1bedb-default-rtdb.firebaseio.com/task/${id}.json`
+      )
+      .pipe(
+        map((val) => {
+          const data: formData = { ...val, id: id };
 
+          return data;
+        }),
+        catchError(this.errorhandle.handleError)
+      );
+  }
 
-
+deleteDetails(id:string|undefined)
+{
+  this.http.delete<formData>()
+}
 
 }

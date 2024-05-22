@@ -59,7 +59,7 @@ export class FormsComponent implements OnInit {
   }
 
   submit() {   
-    this.dialogRef.close({ ...this.Reactiveform.value as formData});
+    this.dialogRef.close(this.Reactiveform.value as formData);
   }
 
   closeForm()

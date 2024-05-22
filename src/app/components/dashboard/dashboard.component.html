@@ -2,8 +2,9 @@
   <span>Pending Tasks</span>
 </mat-toolbar>
 
+<mat-spinner *ngIf="loadSpinner" class="spinner"></mat-spinner>
 
-<div class="cards-container">
+<div *ngIf="!loadSpinner" class="cards-container">
 
     <mat-card  *ngFor="let item of formData" [ngClass]="{'high':item.priority==='High','medium':item.priority==='Medium','low':item.priority==='Low'}">
         <mat-card-subtitle><strong>Ticket Number: </strong> {{item.tasknumber}}</mat-card-subtitle>
@@ -17,13 +18,12 @@
         </div>
     
         <div class="description-box">
-            <p> <strong>description:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim impedit culpa
-                aperiam similique labore sapiente ullam temporibus nobis ipsa quae.
+            <p> <strong>description:</strong>  {{item.taskDescription}}
             </p>
         </div>
     
         <div class="buttons-container">
-            <button mat-stroked-button class="cards-buttons action-buttons" color="primary">details</button>
+            <button mat-stroked-button class="cards-buttons action-buttons" (click)="getFormDetails(item.id)" color="primary">details</button>
             <button mat-stroked-button class="cards-buttons action-buttons" color="accent">update</button>
             <button mat-stroked-button class="cards-buttons action-buttons" color="warn">delete</button>
         </div>
@@ -37,4 +37,45 @@
 
 </div>
 
-<button (click)="getFormData()">click to get data</button>
+ 
+<ng-template #formsdetails >
+    <div [ngClass]="{'high':singleDetails.priority==='High','medium':singleDetails.priority==='Medium','low':singleDetails.priority==='Low'}">
+
+   
+    <h2>Details</h2>
+    <mat-card>
+       <div class="full-width">
+        <strong>
+          Id
+
+        </strong>    
+        {{singleDetails.id}}   
+       </div>
+       <div class="half-width">
+         <strong>
+            AssignedTo: 
+         </strong>  {{singleDetails.assignedTo}} 
+          <strong>
+            AssignedBy: 
+          </strong> {{singleDetails.assignedBy}} 
+       </div>
+       <div class="half-width">
+        <strong>
+            TaskNumber:
+        </strong>   {{singleDetails.tasknumber}} 
+        <strong>
+             Priority:
+        </strong>
+           {{singleDetails.priority}} 
+           <strong>
+AssignedOn:
+</strong>
+{{singleDetails.assignedOn}} 
+       </div>
+       <div class="full-width">
+<strong>Description</strong>
+           {{singleDetails.taskDescription}} 
+       </div>
+    </mat-card>
+</div>
+</ng-template>

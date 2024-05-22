@@ -87,3 +87,31 @@ width: 100%;
 
 /*  */
  
+.spinner{
+    position: absolute;
+    top: 40vh;
+    left: 50vw;
+}
+
+.full-width
+{
+    background-color: steelblue;
+    font-size: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    color: white;
+}
+
+.half-width
+{
+background-color: rgb(254, 255, 209);
+padding: 10px;
+font-size: 20px;
+box-sizing: border-box;
+ 
+}
+.half-width strong
+{
+    margin: 5px;
+}

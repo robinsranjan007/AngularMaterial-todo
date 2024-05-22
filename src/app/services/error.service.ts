@@ -12,6 +12,8 @@ export class ErrorService {
 
 handleError(err:HttpErrorResponse)
 {
+  console.log(err);
+  
   let errMsg=''
 if(!err.error||!err.error.error)
   {
