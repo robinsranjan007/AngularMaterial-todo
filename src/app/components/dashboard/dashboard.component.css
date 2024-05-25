@@ -115,3 +115,28 @@ box-sizing: border-box;
 {
     margin: 5px;
 }
+
+
+.close-details-button{
+    position: absolute;
+    top: 205px;
+    right: 38vw;
+}
+
+.deleteAll{
+    transform: scale(1.4);
+    color: red;
+    position: absolute;
+    right: 10px;
+}
+
+.cancel-delete{
+    margin: 10px;
+    background-color: rgb(116, 240, 116);
+    color: white;
+}
+ 
+.delete-data{
+    background-color: rgb(255, 37, 37);
+    color: white;
+}

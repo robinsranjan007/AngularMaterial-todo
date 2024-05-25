@@ -1,6 +1,6 @@
-import { Component,  Inject, OnInit, } from '@angular/core';
+import { Component,  Inject, Input, OnInit, } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators ,NgForm,FormGroupDirective} from '@angular/forms';
-import { formData, priorityList } from 'src/app/modal';
+import { formData, priorityList, tansferData } from 'src/app/modal';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -18,10 +18,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./forms.component.css'],
 })
 export class FormsComponent implements OnInit {
+  dialogTitle: string='';
   constructor(
     public dialogRef: MatDialogRef<FormsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: formData
+    @Inject(MAT_DIALOG_DATA) public modalData: formData
   ) {}
+
+ 
 
   matcher = new MyErrorStateMatcher(); //error message using angular material
 
@@ -66,4 +69,25 @@ export class FormsComponent implements OnInit {
   {
     this.dialogRef.close(null)
   }
+
+setValue()
+{
+  const formData = this.modalData as formData;
+  if (formData.newData) {
+  const {  tasknumber,
+    assignedTo,
+    assignedBy,
+    assignedOn,
+    priority,
+    taskDescription}=formData.newData
+    this.Reactiveform.setValue({
+      tasknumber,
+      assignedTo,
+      assignedBy,
+      assignedOn,
+      priority,
+      taskDescription
+    })
+  }
+}
 }

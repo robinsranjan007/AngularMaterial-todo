@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { FormsComponent } from './forms/forms.component';
 import { formData } from 'src/app/modal';
 import { HttpServicesService } from 'src/app/services/http-services.service';
@@ -20,17 +20,17 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   @ViewChild('formsdetails') formsdetails!: TemplateRef<any>;
+  @ViewChild('deleteModal') deleteModal!: TemplateRef<any>;
 
   formData: formData[] = [];
-  httpErrorMessages: string = '';
   loadSpinner: boolean = false;
   singleDetails!: formData;
+  dialogRef!: MatDialogRef<any>;
+  updatedData!:formData|undefined
 
   ngOnInit(): void {
     this.getFormData();
   }
-
-  
 
   postFormData(val: formData) {
     this.loadSpinner = true;
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
             duration: 2000,
             panelClass: ['custom-snackbar'],
           });
-        }, 5000);
+        }, 1000);
 
         this.getFormData();
       },
@@ -58,9 +58,9 @@ export class DashboardComponent implements OnInit {
     this.httpservice.getData().subscribe({
       next: (data) => {
         setTimeout(() => {
-          this.formData = data;
           this.loadSpinner = false;
-        }, 2000);
+          this.formData = data;
+        }, 1000);
       },
       error: (err) => {
         this.loadSpinner = false;
@@ -70,17 +70,78 @@ export class DashboardComponent implements OnInit {
   }
 
   getFormDetails(id: string | undefined) {
+    this.loadSpinner=true;
     this.httpservice.getDetails(id).subscribe({
       next: (data) => {
+        this.loadSpinner=false;
         console.log(data);
         this.singleDetails = data;
         console.log(this.singleDetails, 'this is the details');
         this.openDetailsDialog();
       },
-      error:(err)=>
-      {
-        this.snackbar(err)
-      }
+      error: (err) => {
+        this.loadSpinner=false
+        this.snackbar(err);
+      },
+    });
+  }
+
+  deleteCard(id: string | undefined) {
+    this.loadSpinner=true;
+    this.httpservice.deleteDetails(id).subscribe({
+      next: (data) => {
+        this.loadSpinner=false;
+        let message = `The details with id no: ${id} is deleted`;
+        this.snackbar(message);
+        this.getFormData();
+      },
+      error: (err) => {
+        this.loadSpinner=false;
+        let message = 'Failed to delete something is wrong';
+        this.snackbar(message);
+      },
+    });
+  }
+
+  deleteAll() {
+  this.loadSpinner=true;
+    this.httpservice.deleteAllData().subscribe({
+      next: (response) => {
+        this.dialogRef.close();
+        this.loadSpinner=false
+        this.getFormData()
+      },
+      error: (err) => {
+        let message = 'something went wrong cannot be deleted';
+        this.dialogRef.close();
+        this.snackbar(message);
+        this.loadSpinner=false;
+        
+      },
+    });
+
+   
+  }
+
+
+  updateForm(id:string|undefined)
+  { 
+    this.updatedData =this.formData.find((val)=>val.id===id)
+  this.openDialog()   
+  
+  }
+
+
+  cancelDelete()
+  {
+    this.dialogRef.close()
+  }
+
+
+  openDeleteAllModal() {
+    console.log('this is the modal');
+    this.dialogRef = this.dialog.open(this.deleteModal, {
+      disableClose: true,
     });
   }
 
@@ -95,16 +156,23 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-
-  openDetailsDialog() {
-    this.dialog.open(this.formsdetails);
+  openDetailsDialog(): void {
+    this.dialogRef = this.dialog.open(this.formsdetails, {
+    disableClose: true,
+    });
   }
 
-  snackbar(err: string) {
-    this.httpErrorMessages = err;
-    this._errorSnackBar.open(this.httpErrorMessages, 'Close', {
+  snackbar(str: string): void {
+    this._errorSnackBar.open(str, 'Close', {
       duration: 5000,
       panelClass: ['custom-snackbar'],
     });
+  }
+
+  closeDetailForm() {
+    {
+      this.dialogRef.close();
+      console.log('I am also being called');
+    }
   }
 }

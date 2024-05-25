@@ -5,8 +5,16 @@ export interface formData{
     assignedBy:string,
     assignedOn:string,
     priority:string,
-    taskDescription:string
+    taskDescription:string,
+    isUpdateForm?: boolean,
+    newData:any
 }
+
+export interface updateDate{
+ 
+  newData:formData
+}
+
 
 export interface priorityList {
     value:string
@@ -15,4 +23,11 @@ export interface priorityList {
 
   export interface firebaseresponse{
     [key:string]:formData
+  }
+
+  export interface tansferData{
+    
+      formData: formData,
+      formHeading:string
+ 
   }

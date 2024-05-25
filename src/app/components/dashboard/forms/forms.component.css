@@ -62,5 +62,12 @@ width: 10px;
 font-size: 20px;
 font-weight: 12px;
 color: red;
-background-color: white;
+position: absolute;
+top: 0px;
+right: 5px;
+}
+
+.card-title
+{
+    margin-bottom: 10px;
 }

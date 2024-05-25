@@ -1,81 +1,127 @@
 <mat-toolbar>
   <span>Pending Tasks</span>
+  <button class="deleteAll" mat-button (click)="openDeleteAllModal()">Delete All</button>
 </mat-toolbar>
 
 <mat-spinner *ngIf="loadSpinner" class="spinner"></mat-spinner>
 
 <div *ngIf="!loadSpinner" class="cards-container">
+  <mat-card
+    *ngFor="let item of formData"
+    [ngClass]="{
+      high: item.priority === 'High',
+      medium: item.priority === 'Medium',
+      low: item.priority === 'Low'
+    }"
+  >
+    <mat-card-subtitle
+      ><strong>Ticket Number: </strong> {{ item.tasknumber }}</mat-card-subtitle
+    >
+    <div>
+      <span class="text-format"
+        ><strong>Assigned To:</strong> {{ item.assignedTo }}</span
+      >
+      <span class="text-format"
+        ><strong>Assigned By: </strong> {{ item.assignedBy }}</span
+      >
+    </div>
+    <div>
+      <span class="text-format"
+        ><strong>Priority:</strong> {{ item.priority }}</span
+      >
+      <span class="text-format"
+        ><strong>Assigned On: </strong> {{ item.assignedOn }}</span
+      >
+    </div>
 
-    <mat-card  *ngFor="let item of formData" [ngClass]="{'high':item.priority==='High','medium':item.priority==='Medium','low':item.priority==='Low'}">
-        <mat-card-subtitle><strong>Ticket Number: </strong> {{item.tasknumber}}</mat-card-subtitle>
-        <div>
-            <span class="text-format"><strong>Assigned To:</strong> {{item.assignedTo}}</span>
-            <span class="text-format"><strong>Assigned By: </strong> {{item.assignedBy}}</span>
-        </div>
-        <div>
-            <span class="text-format"><strong>Priority:</strong>  {{item.priority}}</span>
-            <span class="text-format"><strong>Assigned On: </strong> {{item.assignedOn}}</span>
-        </div>
-    
-        <div class="description-box">
-            <p> <strong>description:</strong>  {{item.taskDescription}}
-            </p>
-        </div>
-    
-        <div class="buttons-container">
-            <button mat-stroked-button class="cards-buttons action-buttons" (click)="getFormDetails(item.id)" color="primary">details</button>
-            <button mat-stroked-button class="cards-buttons action-buttons" color="accent">update</button>
-            <button mat-stroked-button class="cards-buttons action-buttons" color="warn">delete</button>
-        </div>
-    
-    
-    </mat-card>
+    <div class="description-box">
+      <p><strong>description:</strong> {{ item.taskDescription }}</p>
+    </div>
 
-    <mat-card class="mat-card-button">
-        <button mat-raised-button class="add-button" (click)="openDialog()" >+</button>
-    </mat-card>
+    <div class="buttons-container">
+      <button
+        mat-stroked-button
+        class="cards-buttons action-buttons"
+        (click)="getFormDetails(item.id)"
+        color="primary"
+      >
+        details
+      </button>
+      <button
+        mat-stroked-button
+        class="cards-buttons action-buttons"
+        color="accent"
+        (click)="updateForm(item.id)"
+      >
+        update
+      </button>
+      <button
+        mat-stroked-button
+        class="cards-buttons action-buttons"
+        (click)="deleteCard(item.id)"
+        color="warn"
+      >
+        delete
+      </button>
+    </div>
+  </mat-card>
 
+  <mat-card class="mat-card-button">
+    <button mat-raised-button class="add-button" (click)="openDialog()">
+      +
+    </button>
+  </mat-card>
 </div>
 
- 
-<ng-template #formsdetails >
-    <div [ngClass]="{'high':singleDetails.priority==='High','medium':singleDetails.priority==='Medium','low':singleDetails.priority==='Low'}">
-
-   
+<ng-template #formsdetails>
+  <div
+    [ngClass]="{
+      high: singleDetails.priority === 'High',
+      medium: singleDetails.priority === 'Medium',
+      low: singleDetails.priority === 'Low'
+    }"
+  >
     <h2>Details</h2>
     <mat-card>
-       <div class="full-width">
-        <strong>
-          Id
-
-        </strong>    
-        {{singleDetails.id}}   
-       </div>
-       <div class="half-width">
-         <strong>
-            AssignedTo: 
-         </strong>  {{singleDetails.assignedTo}} 
-          <strong>
-            AssignedBy: 
-          </strong> {{singleDetails.assignedBy}} 
-       </div>
-       <div class="half-width">
-        <strong>
-            TaskNumber:
-        </strong>   {{singleDetails.tasknumber}} 
-        <strong>
-             Priority:
-        </strong>
-           {{singleDetails.priority}} 
-           <strong>
-AssignedOn:
-</strong>
-{{singleDetails.assignedOn}} 
-       </div>
-       <div class="full-width">
-<strong>Description</strong>
-           {{singleDetails.taskDescription}} 
-       </div>
+      <div class="full-width">
+        <strong> Id </strong>
+        {{ singleDetails.id }}
+      </div>
+      <div class="half-width">
+        <strong> AssignedTo: </strong> {{ singleDetails.assignedTo }}
+        <strong> AssignedBy: </strong> {{ singleDetails.assignedBy }}
+      </div>
+      <div class="half-width">
+        <strong> TaskNumber: </strong> {{ singleDetails.tasknumber }}
+        <strong> Priority: </strong>
+        {{ singleDetails.priority }}
+        <strong> AssignedOn: </strong>
+        {{ singleDetails.assignedOn }}
+      </div>
+      <div class="full-width">
+        <strong>Description</strong>
+        {{ singleDetails.taskDescription }}
+      </div>
     </mat-card>
-</div>
+    <div>
+      <button
+        class="close-details-button"
+        (click)="closeDetailForm()"
+        mat-raised-button
+        color="warn"
+      >
+        X
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #deleteModal>
+    <h2 mat-dialog-title style="color: red;">Warning!!!</h2>
+    <mat-dialog-content>
+          <strong style="color: red;"><h2>Are you sure you want to delete all the Tasks</h2></strong>
+          <button mat-raised-button class="delete-data" (click)="deleteAll()">Delete</button>
+          <button mat-raised-button class="cancel-delete" (click)="cancelDelete()">cancel</button>
+    </mat-dialog-content>
 </ng-template>

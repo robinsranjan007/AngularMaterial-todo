@@ -55,7 +55,24 @@ export class HttpServicesService {
 
 deleteDetails(id:string|undefined)
 {
-  this.http.delete<formData>()
+  return this.http.delete<formData>(`https://angular-material-1bedb-default-rtdb.firebaseio.com/task/${id}.json`).pipe(
+    catchError(this.errorhandle.handleError)
+  )
+}
+
+deleteAllData()
+{
+ return this.http.delete<formData>(`https://angular-material-1bedb-default-rtdb.firebaseio.com/task/.json`).pipe(
+  catchError(this.errorhandle.handleError)
+ )
+}
+
+
+updateForm(id:string,data:formData)
+{
+this.http.put<formData>(`https://angular-material-1bedb-default-rtdb.firebaseio.com/task/${id}.json`,data).pipe(
+  catchError(this.errorhandle.handleError)
+)
 }
 
 }
