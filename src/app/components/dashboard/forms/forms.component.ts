@@ -31,6 +31,15 @@ export class FormsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getform();
+    if(this.modalData?.setHeading && this.modalData.newData)
+      {
+        this.dialogTitle ="Update Task"
+        this.setValue()
+      }
+      else
+      {
+          this.dialogTitle ="Create Task"
+      }
   }
 
   priorityList: priorityList[] = [

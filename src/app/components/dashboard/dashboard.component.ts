@@ -22,9 +22,9 @@ export class DashboardComponent implements OnInit {
   @ViewChild('formsdetails') formsdetails!: TemplateRef<any>;
   @ViewChild('deleteModal') deleteModal!: TemplateRef<any>;
 
-  formData: formData[] = [];
+  formData: formData[] = []; // all the data I am getting from get method is stored in this array of formdata
   loadSpinner: boolean = false;
-  singleDetails!: formData;
+  singleDetails!: formData; // this is an object just for chosen id details
   dialogRef!: MatDialogRef<any>;
   updatedData!:formData|undefined
 
@@ -36,13 +36,11 @@ export class DashboardComponent implements OnInit {
     this.loadSpinner = true;
     this.httpservice.postData(val).subscribe({
       next: () => {
-        setTimeout(() => {
-          this.loadSpinner = false;
+        this.loadSpinner = false;
           this._errorSnackBar.open('Successfully created', 'close', {
             duration: 2000,
             panelClass: ['custom-snackbar'],
           });
-        }, 1000);
 
         this.getFormData();
       },
@@ -57,10 +55,8 @@ export class DashboardComponent implements OnInit {
     this.loadSpinner = true;
     this.httpservice.getData().subscribe({
       next: (data) => {
-        setTimeout(() => {
-          this.loadSpinner = false;
+        this.loadSpinner = false;
           this.formData = data;
-        }, 1000);
       },
       error: (err) => {
         this.loadSpinner = false;
@@ -103,6 +99,28 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+
+updateForm(res:formData,id:string|undefined)
+{
+  this.loadSpinner=true;
+  this.httpservice.updateForm(id,res).subscribe(
+    {
+      next:(val: formData)=>{
+        this.loadSpinner=false;
+        console.log(val,'success');
+        this.getFormData();
+        
+      },
+      error:(err)=>{
+        const message ="something went wrong while updating message";
+        this.snackbar(message);
+        this.loadSpinner=false;
+      }
+    }
+  )
+}
+
+
   deleteAll() {
   this.loadSpinner=true;
     this.httpservice.deleteAllData().subscribe({
@@ -116,7 +134,6 @@ export class DashboardComponent implements OnInit {
         this.dialogRef.close();
         this.snackbar(message);
         this.loadSpinner=false;
-        
       },
     });
 
@@ -124,13 +141,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  updateForm(id:string|undefined)
-  { 
-    this.updatedData =this.formData.find((val)=>val.id===id)
-  this.openDialog()   
-  
-  }
-
+ 
 
   cancelDelete()
   {
@@ -145,6 +156,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+
   openDialog(): void {
     const dialogRef = this.dialog.open(FormsComponent, {
       disableClose: true,
@@ -152,9 +164,30 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.postFormData(data);
+        console.log('submit is clicked');
+        
       }
     });
   }
+
+  OpenupdateForm(id:string|undefined)
+  { 
+    this.updatedData =this.formData.find((val)=>val.id===id)
+  const dialogRef=  this.dialog.open(FormsComponent,{
+      disableClose:true,
+      data:{
+        newData :this.updatedData,
+        setHeading:true
+      }
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        console.log('Update is clicked',data);
+        this.updateForm(data,id)
+      }
+    });
+  }
+
 
   openDetailsDialog(): void {
     this.dialogRef = this.dialog.open(this.formsdetails, {
@@ -175,4 +208,7 @@ export class DashboardComponent implements OnInit {
       console.log('I am also being called');
     }
   }
+
+
+
 }

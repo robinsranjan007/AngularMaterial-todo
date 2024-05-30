@@ -23,7 +23,7 @@ if(!err.error||!err.error.error)
   {
     errMsg='Unknow error';
   }
-  return throwError(()=>errMsg) 
+  return throwError(()=>new Error(errMsg)) 
   
 }
 

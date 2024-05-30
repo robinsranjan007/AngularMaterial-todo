@@ -6,7 +6,7 @@ export interface formData{
     assignedOn:string,
     priority:string,
     taskDescription:string,
-    isUpdateForm?: boolean,
+    setHeading?: boolean,
     newData:any
 }
 
