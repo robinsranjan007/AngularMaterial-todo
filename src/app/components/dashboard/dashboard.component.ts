@@ -26,10 +26,12 @@ export class DashboardComponent implements OnInit {
   loadSpinner: boolean = false;
   singleDetails!: formData; // this is an object just for chosen id details
   dialogRef!: MatDialogRef<any>;
-  updatedData!:formData|undefined
+  updatedData!:formData|undefined;
+
 
   ngOnInit(): void {
     this.getFormData();
+  
   }
 
   postFormData(val: formData) {

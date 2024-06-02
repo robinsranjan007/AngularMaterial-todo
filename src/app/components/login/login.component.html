@@ -1,1 +1,40 @@
-<p>login works!</p>
+<form class="form" (ngSubmit)="signupandLogin()"  [formGroup]="loginForm">
+  
+  <mat-card class="login-card"   >
+    <mat-spinner class="loader" *ngIf="loader"></mat-spinner>
+    <mat-card-title>{{formTitle?"SignUp Form":"Login Form"}}</mat-card-title>
+    <!-- email -->
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        [formControlName]="'email'"
+        placeholder="Email"
+        [errorStateMatcher]="matcher"
+      />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+
+
+    <mat-form-field class="full-width" appearance="fill">
+      <!-- Password -->
+      <mat-label>Passoword</mat-label>
+      <input
+        matInput
+        type="password"
+        [formControlName]="'password'"
+        placeholder="passoword"
+        [errorStateMatcher]="matcher"
+      />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        Passoword is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button [disabled]="!this.loginForm.valid" mat-raised-button color="accent" type="submit"  >{{formTitle?"SignUp":"Login"}}</button>
+    <mat-label><a  (click)="ExistingMember()">{{formTitle?"Already a memeber click here":"New User registration"}}</a></mat-label>
+  </mat-card>
+</form>

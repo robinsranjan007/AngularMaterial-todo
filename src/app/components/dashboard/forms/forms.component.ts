@@ -1,6 +1,6 @@
-import { Component,  Inject, Input, OnInit, } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators ,NgForm,FormGroupDirective} from '@angular/forms';
-import { formData, priorityList, tansferData } from 'src/app/modal';
+import { Component,  Inject, OnInit, } from '@angular/core';
+import {  FormControl, FormGroup, Validators ,NgForm,FormGroupDirective} from '@angular/forms';
+import { formData, priorityList } from 'src/app/modal';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -24,10 +24,8 @@ export class FormsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public modalData: formData
   ) {}
 
- 
 
   matcher = new MyErrorStateMatcher(); //error message using angular material
-
 
   ngOnInit(): void {
     this.getform();

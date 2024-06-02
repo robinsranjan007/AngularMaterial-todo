@@ -1,0 +1,64 @@
+ .form{
+    width: 30%;
+    /* border: 1px solid red; */
+    margin: auto;
+    margin-top: 10vh;
+ }
+
+ .login-card
+ {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+ }
+
+ .mat-card-title{
+    color: #ff70ab;
+    text-align: center;
+    font-size: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+ }
+
+ .full-width {
+    margin-bottom: 20px;
+    background: none;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    background: none;
+  }
+  
+  .mat-form-field .mat-input-element {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  .mat-form-field .mat-label {
+    color: #666; /* Adjust label color */
+   
+  }
+
+  a {
+    color: blue; /* Set link color */
+    text-decoration: underline; /* Underline the link */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin-top: 10px; /* Add space above the link */
+  }
+  
+  a:hover {
+    color: darkblue; /* Change color on hover */
+  }
+
+  .loader{
+    position: absolute;
+    top: 130px;
+    left: 213px;
+  }

@@ -10,9 +10,9 @@ import { materialModule } from './material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from  '@angular/common/http';
-import { LoaderComponent } from './components/loader/loader.component';
+ 
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    LoaderComponent,
+ 
     
   ],
   imports: [
@@ -31,7 +31,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     BrowserAnimationsModule,
     materialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
      
   ],
   providers: [],

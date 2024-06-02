@@ -4,8 +4,8 @@
     <div class="head-menu">
         
         <span class="menu" ><a [routerLink]="'/home'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Home</a></span>
-        <span  class="menu"> <a  [routerLink]="'/dashboard'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Dashboard</a></span>
-        <span class="menu" ><a [routerLink]="'/login'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Logout</a></span>
+        <span  class="menu"> <a *ngIf="dashboard"  [routerLink]="'/dashboard'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Dashboard</a></span>
+        <span class="menu" ><a [routerLink]="'/login'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">{{dashboard?'Logout':'Login'}}</a></span>
 </div>
     
     

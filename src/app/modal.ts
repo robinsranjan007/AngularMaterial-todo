@@ -31,3 +31,22 @@ export interface priorityList {
       formHeading:string
  
   }
+
+  
+
+  export interface Authresponse{
+    idToken:string,
+    email:string,
+    refreshToken:string,
+    expiresIn:string,
+    localId:string,
+    registered?:boolean,
+  }
+
+
+  export interface User{
+    email:string,
+    id:string,
+    _token:string,
+    expiresIn:Date
+  }
