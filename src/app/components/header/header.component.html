@@ -4,9 +4,8 @@
     <div class="head-menu">
         
         <span class="menu" ><a [routerLink]="'/home'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Home</a></span>
-        <span  class="menu"> <a *ngIf="dashboard"  [routerLink]="'/dashboard'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Dashboard</a></span>
-        <span class="menu" ><a [routerLink]="'/login'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">{{dashboard?'Logout':'Login'}}</a></span>
+        <span  class="menu"> <a *ngIf="isloggedIn"  [routerLink]="'/dashboard'"  [routerLinkActive]="'active'"   [routerLinkActiveOptions]="{exact:true}">Dashboard</a></span>
+        <span class="menu" ><a [routerLink]="'/login'"  [routerLinkActive]="'active'"  *ngIf="!isloggedIn"  [routerLinkActiveOptions]="{exact:true}"> Login</a></span>
+        <span class="menu" ><a  *ngIf="isloggedIn"   (click)="OnLogout()">Logout</a></span>
 </div>
-    
-    
 </mat-toolbar>

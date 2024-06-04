@@ -67,7 +67,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+ 
+
   getFormDetails(id: string | undefined) {
+    if (id === undefined) {
+      throw new Error('ID must be defined');
+    }
+
     this.loadSpinner=true;
     this.httpservice.getDetails(id).subscribe({
       next: (data) => {
@@ -85,6 +91,10 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteCard(id: string | undefined) {
+    if (id === undefined) {
+      throw new Error('ID must be defined');
+    }
+
     this.loadSpinner=true;
     this.httpservice.deleteDetails(id).subscribe({
       next: (data) => {
@@ -101,9 +111,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+ 
 
 updateForm(res:formData,id:string|undefined)
 {
+  if (id === undefined) {
+    throw new Error('ID must be defined');
+  }
+
   this.loadSpinner=true;
   this.httpservice.updateForm(id,res).subscribe(
     {
@@ -174,6 +189,10 @@ updateForm(res:formData,id:string|undefined)
 
   OpenupdateForm(id:string|undefined)
   { 
+    if (id === undefined) {
+      throw new Error('ID must be defined');
+    }
+
     this.updatedData =this.formData.find((val)=>val.id===id)
   const dialogRef=  this.dialog.open(FormsComponent,{
       disableClose:true,
