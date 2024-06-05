@@ -1,0 +1,77 @@
+.container {
+    display: flex;
+    width: 100%;
+    height: 70%;
+}
+
+.image {
+    border: 1px solid black;
+    position: absolute;
+    right: 25vw;
+    top: 170px;
+    border-radius: 100%;
+}
+
+.image img {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+}
+
+.heading-content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    padding-left: 100px;
+}
+
+.heading-content h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cards {
+    background-color: #f0f0f0;
+    flex: 1;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cards h1 {
+    text-align: center;
+}
+
+.cards-details {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.example-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.example-card mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+  
+}
